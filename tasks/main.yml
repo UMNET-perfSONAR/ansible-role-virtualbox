@@ -1,7 +1,38 @@
 ---
-# template tasks file
+- name: Install assorted software dependencies
+  yum:
+    name: 
+      - gcc
+      - dkms
+      - make
+      - qt
+      - libgomp
+      - patch
+      - wget
+      - kernel-devel
+      - kernel-headers
+      - binutils
+      - glibc-headers
+      - glibc-devel
+    state: latest
+  become: yes
+  become_method: su
 
-- name: Load variables based on OS type
-  tags: [ 'tag', 'another_tag' ]
-  debug:
-    msg: "{{ somevar | default('ansible') }}"
+
+############ VirtualBox Installation (Move to separate role later) ###############
+
+- name: Download Virtual Box
+  shell:
+    "wget https://download.virtualbox.org/virtualbox/rpm/el/virtualbox.repo -P /etc/yum.repos.d"
+  become: yes
+  become_method: su
+
+- name: Install Virtual Box
+  yum:
+    name: VirtualBox-6.1
+    state: latest
+  become: yes
+  become_method: su
+
+
+
