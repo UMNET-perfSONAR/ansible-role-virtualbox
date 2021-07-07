@@ -14,9 +14,23 @@
       - binutils
       - glibc-headers
       - glibc-devel
+      - git
     state: latest
   become: yes
   become_method: su
+
+- name: Download Kernel Devel -r
+  shell:
+    "yum install kernel-devel-$(uname -r)"
+  become: yes
+  become_method: su
+
+- name: Download Kernel Headers -r
+  shell:
+    "yum install kernel-headers-$(uname -r)"
+  become: yes
+  become_method: su
+
 
 
 ############ VirtualBox Installation (Move to separate role later) ###############
