@@ -21,13 +21,20 @@
 
 - name: Download Kernel Devel -r
   shell:
-    "yum install kernel-devel-$(uname -r)"
+    "yum -y install kernel-devel-$(uname -r)"
   become: yes
   become_method: su
 
+- name: Install python-netaddr
+  shell:
+    "yum -y install python-netaddr"
+  become: yes
+  become_method: su
+
+
 - name: Download Kernel Headers -r
   shell:
-    "yum install kernel-headers-$(uname -r)"
+    "yum -y install kernel-headers-$(uname -r)"
   become: yes
   become_method: su
 
